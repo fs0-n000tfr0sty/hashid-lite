@@ -22,9 +22,21 @@ def identify(h):
     return []
 
 
+def main(args):
+    if len(args) != 1:
+        print("usage: hashid.py <hash | file>")
+        return 1
+    try:
+        with open(args[0]) as f:
+            hashes = [line.strip() for line in f if line.strip()]
+    except OSError:
+        hashes = [args[0]]
+    for h in hashes:
+        found = identify(h)
+        label = ", ".join(found) if found else "unknown"
+        print(f"{h[:24]:<24}  {label}" if len(hashes) > 1 else "\n".join(found) or "unknown")
+    return 0
+
+
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("usage: hashid.py <hash>")
-        sys.exit(1)
-    found = identify(sys.argv[1])
-    print("\n".join(found) if found else "unknown")
+    sys.exit(main(sys.argv[1:]))
