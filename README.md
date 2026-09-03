@@ -10,3 +10,8 @@ guess what kind of hash you're looking at. no dependencies.
     MD4
 
 the first guess is the most common one. it's a guess, not a verdict.
+
+## notes
+
+a 32-char hex string could be md5 or ntlm. you can't tell from the shape alone.
+look at where it came from.
